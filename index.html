@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Quiz Game</title>
+</head>
+<body>
+    <h1>Instagram Quiz Game</h1>
+    <p>Test your knowledge of Instagram!</p>
+    <a href="https://proinstaapks.com/">Instagram Pro</a>
+
+    <div id="question">
+        <p>Question goes here...</p>
+    </div>
+    
+    <div id="options">
+        <button onclick="checkAnswer('A')">Option A</button>
+        <button onclick="checkAnswer('B')">Option B</button>
+        <button onclick="checkAnswer('C')">Option C</button>
+    </div>
+    
+    <p id="result"></p>
+    
+    <script>
+        // Game logic goes here
+        var currentQuestion = 0;
+        var questions = [
+            {
+                question: "What year was Instagram launched?",
+                options: {
+                    A: "2009",
+                    B: "2012",
+                    C: "2015"
+                },
+                answer: "A"
+            },
+            // Add more questions here...
+        ];
+        
+        function displayQuestion(question) {
+            document.getElementById("question").innerHTML = question.question;
+            var optionsHtml = "";
+            for (var option in question.options) {
+                optionsHtml += `<button onclick="checkAnswer('${option}')">${question.options[option]}</button>`;
+            }
+            document.getElementById("options").innerHTML = optionsHtml;
+        }
+        
+        function checkAnswer(selectedOption) {
+            if (selectedOption === questions[currentQuestion].answer) {
+                document.getElementById("result").textContent = "Correct!";
+            } else {
+                document.getElementById("result").textContent = "Incorrect. The correct answer is " + questions[currentQuestion].options[questions[currentQuestion].answer];
+            }
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion(questions[currentQuestion]);
+            } else {
+                document.getElementById("result").textContent = "Quiz completed!";
+            }
+        }
+        
+        displayQuestion(questions[currentQuestion]);
+    </script>
+</body>
+</html>
